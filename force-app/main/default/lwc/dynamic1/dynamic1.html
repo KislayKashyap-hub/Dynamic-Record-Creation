@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Dynamic Record Creation" icon-name="custom:custom10">
+        <div class="slds-scrollable_y slds-p-around_medium" style="height: 400px;overflow-y: auto;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead style="position: sticky; top: 0; z-index: 2; background: #f4f6f9; border-bottom: 1px solid #d8dde6;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={accounts} for:item="acc">
+                        <tr key={acc.Id}>
+                            <td style="cursor: pointer;" onclick={showContacts} data-id={acc.Id}>{acc.Name}</td>
+                            <td>
+                               <lightning-button label="Create Contact" variant="brand" data-id={acc.Id} onclick={onCreate}>
+                               </lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+
+    <c-dynamic2 ismodal={ismodal} accid={accid} onclosemodal={closemodal}></c-dynamic2>
+    <c-dynamic3 acid={acid} showmodal={showmodal} onclosemodal1={closemodal1}></c-dynamic3>
+</template>

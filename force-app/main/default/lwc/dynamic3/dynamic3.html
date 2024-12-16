@@ -1,0 +1,65 @@
+<template>
+    <template if:true={showmodal}>
+ 
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            <button class="slds-button slds-button_icon slds-modal__close" onclick={closemodal1}>
+            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+            </svg>
+            <span class="slds-assistive-text">Cancel and close</span>
+            </button>
+            <div class="slds-modal__header">
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Create Contact</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+           
+              <h1>{acid}</h1>
+ 
+              <div class="slds-scrollable_y slds-p-around_medium" style="height: 400px;overflow-y: auto;">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead style="position: sticky; top: 0; z-index: 2; background: #f4f6f9; border-bottom: 1px solid #d8dde6;">
+                        <tr>
+                            <th><lightning-input type="checkbox" onchange={handleSelectAll}></lightning-input></th>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={allcontacts} for:item="con">
+                            <tr key={con.Id} data-id={con.Id}>
+                                <td>
+                                    <lightning-input
+                                        type="checkbox"
+                                        value={con.Id}
+                                        data-id={con.Id}
+                                        onchange={handlerowselection}
+                                        >
+                                    </lightning-input>
+                                </td>
+                                <td><a href="javascript:void(0)" data-id={con.Id} onclick={navigate}>{con.Name}</a></td>
+                                <td>{con.Email}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+   
+            <template if:true={showDelBtn}>
+                <div>
+                    <lightning-button label="Delete" variant="brand" onclick={deleteCon}></lightning-button>
+                </div>
+            </template>
+           
+            </div>
+            <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closemodal1} >Cancel</button>
+            <button class="slds-button slds-button_brand" >Save</button>
+            </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+ 
+    </template>
+   
+</template>
